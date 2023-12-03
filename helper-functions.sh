@@ -68,3 +68,11 @@ log() {
 
     echo -e "${color}[$(date '+%Y-%m-%d %H:%M:%S')] (${script_name}) ${level}: ${reset_color} ${message}"
 }
+
+verify_dependency() {
+    local dependency=${1}
+    if ! command -v "${dependency}" &> /dev/null; then
+        echo "Error: Required dependency '${dependency}' is not installed." >&2
+        return 1
+    fi
+}
